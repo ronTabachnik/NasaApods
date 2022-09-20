@@ -62,6 +62,9 @@ extension imagesViewController: UITableViewDataSource,UITableViewDelegate {
         }
         vc.apod = apod[index]
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return apod.count
@@ -72,6 +75,7 @@ extension imagesViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = apodsTableView.dequeueReusableCell(withIdentifier: "apodCell") as! CustomCell
         let selected = apod[indexPath.row]
+        cell.selectionStyle = .blue
         cell.apodImageView.image = selected.image
         cell.apodImageView.layer.cornerRadius = 20
         cell.apodImageView.clipsToBounds = true
@@ -79,4 +83,5 @@ extension imagesViewController: UITableViewDataSource,UITableViewDelegate {
         cell.apodDateView.text = selected.date
         return cell
     }
+    
 }
